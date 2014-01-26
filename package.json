@@ -1,0 +1,15 @@
+{
+  "name": "big-executable",
+  "version": "0.1.0",
+  "description": "inline a modules dependencies to reduce startup IO",
+  "keywords": ["inliner", "executable"],
+  "dependencies": {
+    "sourcegraph": "~0.9.1",
+    "commander": "2.1.0",
+    "result": "~0.4.7"
+  },
+  "bin": {"big-executable": "bin/big"},
+  "author": "Jake Rosoman <jkroso@gmail.com>",
+  "repository": "git://github.com/jkroso/big-executable.git",
+  "files": [ "index.js", "template.js" ]
+}

@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+var path = require('path')
+var inline = require('..')
+
+program.version(require('../package').version)
+  .usage('[options] <entry>')
+  .on('--help', function () {
+    console.log('  Examples: ')
+    console.log('')
+    console.log('    # inline a file')
+    console.log('    $ inline-deps file.js')
+    console.log('')
+  })
+  .parse(process.argv)
+
+if (!program.args.length) program.help()
+
+// Convert to absolute paths
+var entry = path.resolve(program.args[0])
+
+inline(entry).read(function(src){
+  process.stdout.write(src)
+})
