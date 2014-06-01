@@ -4,9 +4,9 @@
   "description": "inline a modules dependencies to reduce startup IO",
   "keywords": ["inliner", "executable"],
   "dependencies": {
-    "sourcegraph": "~0.9.1",
-    "commander": "2.1.0",
-    "result": "~0.4.7"
+    "sourcegraph": "~0.9.10",
+    "commander": "^2.2.0",
+    "result": "^1.0.2"
   },
   "bin": {"big-executable": "bin/big"},
   "author": "Jake Rosoman <jkroso@gmail.com>",
