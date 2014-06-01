@@ -12,15 +12,17 @@ var modules = files.map(function(file){
   mod.filename = file.id
   mod.deps = file.deps
   mod.source = file.source
-  mod.require = function(request){
-    var id = this.deps[request]
-    var mod = cache[id]
-    if (mod) return load(mod)
-    return Module._load(request, this)
-  }
+  mod.require = req
   cache[mod.filename] = mod
   return mod
 })
+
+function req(request){
+  var id = this.deps[request]
+  var mod = cache[id]
+  if (mod) return load(mod)
+  return Module._load(request, this)
+}
 
 function load(mod){
   if (!mod.loaded) {
