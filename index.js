@@ -3,8 +3,6 @@ var graph = require('sourcegraph')
 var when = require('result').when
 var fs = require('fs')
 
-module.exports = inline
-
 var file = require.resolve('./template')
 var template = fs.readFileSync(file, 'utf8').split('[]')
 
@@ -16,7 +14,7 @@ var template = fs.readFileSync(file, 'utf8').split('[]')
 var options = {
   env: 'node',
   transpile: [
-    '*.json', function(src, path){
+    '*.json', function(src){
       return 'module.exports = ' + src
     }
   ]
@@ -55,3 +53,5 @@ function build(files){
   })
   return template[0] + arr + template[1]
 }
+
+module.exports = inline
