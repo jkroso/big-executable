@@ -27,10 +27,7 @@ function req(request){
 function load(mod){
   if (!mod.loaded) {
     mod.loaded = true
-    var str = mod.source
-    // remove byte order maker
-    if (str.charCodeAt(0) == 0xFEFF) str = str.slice(1)
-    mod._compile(str, mod.filename)
+    mod._compile(mod.source, mod.filename)
   }
   return mod.exports
 }
