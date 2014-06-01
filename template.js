@@ -2,6 +2,7 @@
 
 var Module = require('module')
 var path = require('path')
+var cache = Module._cache
 
 var files = []
 
@@ -17,24 +18,17 @@ var modules = files.map(function(file){
     if (mod) return load(mod)
     return Module._load(request, this)
   }
+  cache[mod.filename] = mod
   return mod
 })
-
-var cache = modules.reduce(function(cache, mod){
-  cache[mod.filename] = mod
-  return cache
-}, {})
-
-// remove byte order maker
-function stripBOM(str) {
-  if (str.charCodeAt(0) === 0xFEFF) return str.slice(1)
-  return str
-}
 
 function load(mod){
   if (!mod.loaded) {
     mod.loaded = true
-    mod._compile(stripBOM(mod.source), mod.filename)
+    var str = mod.source
+    // remove byte order maker
+    if (str.charCodeAt(0) == 0xFEFF) str = str.slice(1)
+    mod._compile(str, mod.filename)
   }
   return mod.exports
 }
